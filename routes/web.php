@@ -9,7 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
+
+    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::get('/tasks/create', [TaskController::class, 'create']);
+    Route::post('/tasks/store', [TaskController::class, 'store']);
 });
 
 

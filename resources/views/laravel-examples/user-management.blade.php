@@ -12,7 +12,7 @@
                         <div>
                             <h5 class="mb-0">All Tasks</h5>
                         </div>
-                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; Create Task</a>
+                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">+&nbsp; Create Task</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -86,4 +86,59 @@
     </div>
 </div>
 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{ route('tasks.store') }}" method="POST">
+      <div class="modal-body">
+
+             @csrf
+             <input type="hidden" value="{{ auth()->user()->id }}" name="client_id">
+          <div class="mb-3">
+            <label for="task-name" class="col-form-label">Task Name:</label>
+            <input type="text" name="task_name" class="form-control" id="task-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Task Description:</label>
+            <textarea name="task_description" class="form-control" id="message-text"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="task-deadline" class="col-form-label">Task Dealine:</label>
+            <input name="task_deadline" type="datetime-local" class="form-control" id="task-daedline">
+          </div>
+          <div class="mb-3">
+            <label for="task-importance" class="col-form-label">Task Importance:</label>
+            <select name="importance" class="form-control" id="task-importance">
+                <option value="">--select--</option>
+                <option value="1">level 1</option>
+                <option value="2">level 2</option>
+                <option value="3">level 3</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="task-status" class="col-form-label">Task Status:</label>
+            <select name="status" class="form-control" id="task-status">
+                <option value="">--select--</option>
+                <option value="completed">Completed</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="draft">Draft</option>
+            </select>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
