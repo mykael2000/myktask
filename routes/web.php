@@ -41,9 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('rtl');
 	})->name('rtl');
 
-	Route::get('user-management', function () {
-		return view('laravel-examples/user-management');
-	})->name('user-management');
+	Route::get('task-management', [TaskController::class, 'index'])->name('task-management');
 
 	Route::get('tables', function () {
 		return view('tables');
@@ -70,7 +68,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/tasks', [TaskController::class, 'index']);
     Route::get('/tasks/create', [TaskController::class, 'create']);
-    Route::post('/tasks/store', [TaskController::class, 'store']);
+    Route::post('/tasks/store', [TaskController::class, 'store'])->name('tasks.store');
+
+    Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/tasks/delete/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
 });
 
 

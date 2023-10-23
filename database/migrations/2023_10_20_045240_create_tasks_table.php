@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('task_id');
             $table->string('task_name');
             $table->string('task_description');
-            $table->date('task_deadline');
+            $table->datetime('task_deadline');
             $table->string('importance');
             $table->string('status');
             $table->timestamps();
